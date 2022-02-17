@@ -32,7 +32,7 @@ add_library( # Sets the name of the library.
 # completing its build.
 
 ######### Oboe - sets library directories, adds to project
-set(OBOE_DIR C:/Users/hhold/AndroidStudioProjects/oboe)
+set(OBOE_DIR C:/Users/hhold/AndroidStudioProjects/oboe) #local oboe root dir path
 add_subdirectory(${OBOE_DIR} ./oboe)
 include_directories(${OBOE_DIR}/include)
 #########
