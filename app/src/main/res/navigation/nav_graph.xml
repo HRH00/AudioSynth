@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/nav_main">
+
+
+
+    <fragment
+        android:id="@+id/nav_main"
+        android:name="com.example.audiosynth.ui.main.MainFragment"
+        android:label="Main"
+        tools:layout="@layout/main_fragment"
+        />
+    <fragment
+        android:id="@+id/nav_tuner"
+        android:name="com.example.audiosynth.ui.tuner.TunerFragment"
+        android:label="Tuner"
+        tools:layout="@layout/tuner_fragment"
+        />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.audiosynth.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/settings_fragment"
+        />
+</navigation>
