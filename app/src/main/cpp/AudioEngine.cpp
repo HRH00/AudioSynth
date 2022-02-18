@@ -26,6 +26,8 @@ AudioEngine::AudioEngine(){
     beginStreams();
 }
 
+
+//I16 signed 16 bit integer, float for AAudio
 void AudioEngine::beginStreams() {
     LOGI("beginStreams has been called");
     openInStream();
@@ -80,6 +82,7 @@ void AudioEngine::openInStream() {
 void AudioEngine::openOutStream() {
     LOGI("openOutStream has been called");
     defaultBuilder().setCallback(mCallback.get())
+            ->setDeviceId(3)//This is temp - so we can output audio direct to build in mic
             ->setSampleRate(inStream->getSampleRate())
             ->setFormat(inStream->getFormat())
             ->setChannelCount(2) // Stereo out

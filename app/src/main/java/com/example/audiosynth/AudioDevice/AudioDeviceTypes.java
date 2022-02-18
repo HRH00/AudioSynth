@@ -1,7 +1,7 @@
 package com.example.audiosynth.AudioDevice;
 
 
-public final class AudioDeviceType{
+public final class AudioDeviceTypes {
     //Data Source - https://developer.android.com/reference/android/media/AudioDeviceInfo
     public static final int TYPE_AUX_LINE = 19;
     //A device type describing the auxiliary line-level connectors.
@@ -132,22 +132,4 @@ public final class AudioDeviceType{
     //A device type describing a headset, which is the combination of a headphones and microphone.
     //
     //Constant Value: 3 (0x00000003)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

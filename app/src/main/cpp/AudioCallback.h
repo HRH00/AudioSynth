@@ -37,7 +37,7 @@ public:
     onAudioReady(oboe::AudioStream *outputStream, void *audioData, int32_t numFrames) override {
         auto *outputData = static_cast<numeric_type *>(audioData);
         auto outputChannelCount = outputStream->getChannelCount();
-        LOGI("Callack for data");
+//        LOGI("Callack for data");
         // Silence first to simplify glitch detection
         std::fill(outputData, outputData + numFrames * outputChannelCount, 0);
         oboe::ResultWithValue<int32_t> result = inRef.read(inputBuffer.get(), numFrames, 0);
