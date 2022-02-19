@@ -1,4 +1,4 @@
-package com.example.audiosynth.ui.main;
+package com.example.audiosynth.fragments.main;
 
 import androidx.lifecycle.ViewModel;
 

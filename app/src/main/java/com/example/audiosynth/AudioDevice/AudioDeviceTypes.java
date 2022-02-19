@@ -1,8 +1,9 @@
 package com.example.audiosynth.AudioDevice;
 
-
+//This entire class is dedicated to Defining int types to names of Audio Devices as as per the
+// AudioDeviceInformation Documentation (below)
+//Data Source - https://developer.android.com/reference/android/media/AudioDeviceInfo
 public final class AudioDeviceTypes {
-    //Data Source - https://developer.android.com/reference/android/media/AudioDeviceInfo
     public static final int TYPE_AUX_LINE = 19;
     //A device type describing the auxiliary line-level connectors.
     //

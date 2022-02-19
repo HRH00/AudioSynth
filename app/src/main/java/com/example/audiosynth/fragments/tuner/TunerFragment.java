@@ -1,4 +1,4 @@
-package com.example.audiosynth.ui.tuner;
+package com.example.audiosynth.fragments.tuner;
 
 import androidx.lifecycle.ViewModelProvider;
 

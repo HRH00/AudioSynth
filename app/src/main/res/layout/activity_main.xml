@@ -11,10 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.181" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -43,7 +45,7 @@
         app:navGraph="@navigation/nav_graph" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/switchTextbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Output Devices"
@@ -51,19 +53,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sample_text"
-        android:onClick="displayOutStr"/>
+        android:onClick="onClickDisplayOutStr"/>
 
     <Button
-        android:id="@+id/onOff"
+        android:id="@+id/onOffButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Button"
+        android:text="Disable Audio Engine"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/switchTextbutton"
         android:onClick="onOffButtonClicked"/>
 
 
