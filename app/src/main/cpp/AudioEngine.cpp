@@ -68,7 +68,8 @@ oboe::AudioStreamBuilder AudioEngine::defaultBuilder() {
     LOGI("defaultBuilder has been called");
     return *oboe::AudioStreamBuilder()
             .setPerformanceMode(oboe::PerformanceMode::LowLatency)
-            ->setSharingMode(oboe::SharingMode::Exclusive);
+            ->setSharingMode(oboe::SharingMode::Exclusive
+              );
 }
 
 void AudioEngine::openInStream() {

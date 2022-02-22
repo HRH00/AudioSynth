@@ -14,7 +14,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import com.example.audiosynth.databinding.ActivityMainBinding;
 import android.media.AudioManager;
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         return super.getWindow();
     }
 
+
+
 //Find and output as string to tv - Audio devices
 //used to pass the array list of devices, and pass the activity's context. Variables are an arraylist of audio device ob
 //gets and sets tv to string of input device names, from device ids
@@ -49,24 +54,37 @@ public class MainActivity extends AppCompatActivity {
         String strAudioInDevices;
         TextView tv = binding.sampleText;
         Button btn = binding.switchTextbutton;
+
+
         listButtonClicked = !listButtonClicked;
+
         if (listButtonClicked){
-            ArrayList audioInDevices = AudioDeviceId.getAvailableInputDevices((AudioManager) getSystemService(Context.AUDIO_SERVICE));
-            strAudioOutDevices = DeviceInfoToString.deviceIdListToSingleStr(audioInDevices);
+            ArrayList audioOutDevices = AudioDeviceId.getAvailableOutputDevices((AudioManager) getSystemService(Context.AUDIO_SERVICE));
+            strAudioOutDevices = DeviceInfoToString.deviceIdListToSingleStr(audioOutDevices);
             //Adds a Title
             strAudioOutDevices= "AVAILABLE OUTPUT DEVICES\n" + strAudioOutDevices;
             tv.setText(strAudioOutDevices);
             btn.setText("VIEW INPUT DEVICES");
+
+            //fillDropdown(audioInDevices,audioInDevices);
         }
         else{
-            ArrayList audioOutDevices = AudioDeviceId.getAvailableOutputDevices((AudioManager) getSystemService(Context.AUDIO_SERVICE));
-            strAudioInDevices = DeviceInfoToString.deviceIdListToSingleStr(audioOutDevices);
+            ArrayList audioInDevices = AudioDeviceId.getAvailableInputDevices((AudioManager) getSystemService(Context.AUDIO_SERVICE));
+            strAudioInDevices = DeviceInfoToString.deviceIdListToSingleStr(audioInDevices);
             strAudioInDevices= "AVAILABLE INPUT DEVICES\n" + strAudioInDevices;
             tv.setText(strAudioInDevices);
             btn.setText("VIEW OUTPUT DEVICES");
         }
     }
 
+
+
+    public void fillDropdown(ArrayList idNameString, ArrayList IdIntList){
+        //Spinner Filler
+        Spinner dropdown  = findViewById(R.id.spinner2);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, IdIntList);
+        dropdown.setAdapter(adapter);
+        }
 
     public void onOffButtonClicked(View view){
         Button btn = binding.onOffButton;
