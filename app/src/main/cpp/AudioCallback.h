@@ -18,7 +18,8 @@
 #define ANDROID_AUDIOSYNTH_AUDIOCALLBACK_H
 #include "oboe/Oboe.h"
 #include "logging_macros.h"
-
+#include <stdbool.h>
+#include "jni.h"
 // This callback handles mono in, stereo out synchronized audio passthrough.
 // It takes a function which operates on two pointers (beginning and end)
 // of underlying data.
@@ -26,6 +27,7 @@
 template<class numeric_type>
 class AudioCallback : public oboe::AudioStreamCallback {
 public:
+    mutable bool distOn = false;
 
     AudioCallback(oboe::AudioStream &inStream,
                   std::function<void(numeric_type *, numeric_type *)> fun,
@@ -53,7 +55,14 @@ public:
         f(inputBuffer.get(), inputBuffer.get() + framesRead);
         for (int i = 0; i < framesRead; i++) {
             for (size_t j = 0; j < outputChannelCount; j++) {
-                *outputData++ = inputBuffer[i];
+                if (distOn==false){
+                    *outputData++ = inputBuffer[i];
+                }
+                else{
+                    *outputData++ = (sin(inputBuffer[i])*10);
+                }
+
+
             }
         }
         return oboe::DataCallbackResult::Continue;

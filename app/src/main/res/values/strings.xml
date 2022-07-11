@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AudioSynth</string>
+    <string name="distortion">Distortion</string>
 </resources>

@@ -11,7 +11,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -28,10 +30,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    //temp global variables for touch event driven methods
-    boolean buttonClicked = false;
+    //global variables for touch events and audio controller
+    boolean engineOn = false;
     boolean listButtonClicked = false;
-
     // Used to load the 'audiosynth' library on application startup.
     static {
         System.loadLibrary("audiosynth");
@@ -50,30 +51,34 @@ public class MainActivity extends AppCompatActivity {
 //used to pass the array list of devices, and pass the activity's context. Variables are an arraylist of audio device ob
 //gets and sets tv to string of input device names, from device ids
     public void onClickDisplayOutStr(View view){
-        String strAudioOutDevices;
-        String strAudioInDevices;
+        ArrayList<String> strListAudioOutDevices;
+        ArrayList<String> strListAudioInDevices;
         TextView tv = binding.sampleText;
-        Button btn = binding.switchTextbutton;
-
+        Button onOffBtn = binding.onOffButton;
+        Button deviceBtn = binding.switchTextbutton;
 
         listButtonClicked = !listButtonClicked;
 
         if (listButtonClicked){
             ArrayList audioOutDevices = AudioDeviceId.getAvailableOutputDevices((AudioManager) getSystemService(Context.AUDIO_SERVICE));
-            strAudioOutDevices = DeviceInfoToString.deviceIdListToSingleStr(audioOutDevices);
-            //Adds a Title
-            strAudioOutDevices= "AVAILABLE OUTPUT DEVICES\n" + strAudioOutDevices;
-            tv.setText(strAudioOutDevices);
-            btn.setText("VIEW INPUT DEVICES");
+            strListAudioOutDevices = DeviceInfoToString.deviceIdListToStringList(audioOutDevices);
+            fillDropdown(strListAudioOutDevices, audioOutDevices);//fills the drop down element\
 
-            //fillDropdown(audioInDevices,audioInDevices);
+            //Adds a Title
+            deviceBtn.setText("VIEW INPUT DEVICES");
+            tv.setText("AVAILABLE INPUT DEVICES\n" + DeviceInfoToString.deviceIdListToSingleStr(audioOutDevices));
         }
+
         else{
             ArrayList audioInDevices = AudioDeviceId.getAvailableInputDevices((AudioManager) getSystemService(Context.AUDIO_SERVICE));
-            strAudioInDevices = DeviceInfoToString.deviceIdListToSingleStr(audioInDevices);
-            strAudioInDevices= "AVAILABLE INPUT DEVICES\n" + strAudioInDevices;
-            tv.setText(strAudioInDevices);
-            btn.setText("VIEW OUTPUT DEVICES");
+            strListAudioInDevices = DeviceInfoToString.deviceIdListToStringList(audioInDevices);
+            fillDropdown(strListAudioInDevices, audioInDevices);//fills the drop down element\
+            tv.setText("AVAILABLE INPUT DEVICES\n" +DeviceInfoToString.deviceIdListToSingleStr(audioInDevices));
+            deviceBtn.setText("VIEW OUTPUT DEVICES");
+
+
+
+
         }
     }
 
@@ -82,34 +87,50 @@ public class MainActivity extends AppCompatActivity {
     public void fillDropdown(ArrayList idNameString, ArrayList IdIntList){
         //Spinner Filler
         Spinner dropdown  = findViewById(R.id.spinner2);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, IdIntList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, idNameString);
         dropdown.setAdapter(adapter);
-        }
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                Log.d("Dropdown", String.valueOf(index));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });}
 
     public void onOffButtonClicked(View view){
-        Button btn = binding.onOffButton;
-        buttonClicked = !buttonClicked;
-        if (buttonClicked){
-            destroyAudioEngine();
-            btn.setText("Enable Audio Engine");
+        Button onOffBtn = binding.onOffButton;
+        engineOn = !engineOn;
+        if (engineOn==false){
+            Log.d("Button","Button  clicked");
+
+            AudioEngineController singleton = AudioEngineController.getInstance();
+            singleton.destroyAudioEngine();
+            onOffBtn.setText("Enable Audio Engine");
         }
         else{
-            btn.setText("Disable Audio Engine");
-            createAudioEngine();
-            enablePassthroughNative();
-
+            AudioEngineController singleton = AudioEngineController.getInstance();
+            singleton.createAudioEngine();
+            onOffBtn.setText("Disable Audio Engine");
         }
     }
 
     @Override public void onResume(){
         super.onResume();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED){
-            createAudioEngine();
+
+            Log.d("ME","RESUME HAS RUN");
         }
     }
     @Override public void onPause() {
-        destroyAudioEngine();
         super.onPause();
+        Button onOffBtn = binding.onOffButton;
+        onOffBtn.setText("Enable Audio Engine");
+        AudioEngineController singleton = AudioEngineController.getInstance();
+        singleton.destroyAudioEngine();
     }
 
     @Override
@@ -140,34 +161,13 @@ public class MainActivity extends AppCompatActivity {
         }
     // Permissions end
 
-
-
-
-
-    // Native Calls to start audio engine
-        createAudioEngine();
-        enablePassthroughNative();
-    //End native Calls
-
-
-
-
-
-
-
+    //Set the start audio engine button text to correct string
+        Button onOffBtn = binding.onOffButton;
+        onOffBtn.setText("Enable Audio Engine");
     }
 
-
-
-    /**
-     * A native method that is implemented by the 'audiosynth' native library,
-     * which is packaged with this application.
-     */
-//Native Methods Declarations
-    public native void createAudioEngine();
-    public native void destroyAudioEngine();
-    public native void enablePassthroughNative();
-
-
-
+    public void cycleDistortion(View view) {
+        AudioEngineController singleton = AudioEngineController.getInstance();
+        singleton.cycleDistortion();
+    }
 }

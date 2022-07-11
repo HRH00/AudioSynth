@@ -25,6 +25,7 @@
 #include "FunctionList.h"
 
 
+
 class AudioEngine {
 public:
     AudioEngine();
@@ -55,7 +56,5 @@ private:
     oboe::ManagedStream inStream;
     std::unique_ptr<oboe::AudioStreamCallback> mCallback;
     oboe::ManagedStream outStream;
-
-
 };
 #endif //ANDROID_AUDIOSYNTH_AUDIOENGINE_H
