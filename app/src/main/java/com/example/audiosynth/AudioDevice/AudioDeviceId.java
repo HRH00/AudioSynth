@@ -2,6 +2,9 @@ package com.example.audiosynth.AudioDevice;
 
 import android.media.AudioManager;
 import android.media.AudioDeviceInfo;
+
+import com.example.audiosynth.AudioEngineController;
+
 import java.util.ArrayList;
 
 
@@ -9,7 +12,6 @@ import java.util.ArrayList;
 //Activity Context to the methods without the need for inheritance (ie class a extends b).
 //The methods then use the AudioManager class to return ArrayLists of connect audio device Ids
 public class AudioDeviceId {
-
     public static ArrayList<Integer> getAvailableInputDevices(AudioManager audioManager) {
         ArrayList<Integer> deviceList = new ArrayList<>();
         if (audioManager != null) {
@@ -27,8 +29,5 @@ public class AudioDeviceId {
             }
         }
         return deviceList;
-
     }
-
-
 }

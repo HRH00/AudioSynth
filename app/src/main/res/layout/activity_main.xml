@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -30,6 +19,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
+
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -37,61 +27,24 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/nav_graph" />
 
     <Button
-        android:id="@+id/switchTextbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Output Devices"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sample_text"
-        android:onClick="onClickDisplayOutStr"/>
-
-    <Button
         android:id="@+id/onOffButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="onOffButtonClicked"
+        android:layout_width="169dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="52dp"
         android:text="Disable Audio Engine"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchTextbutton"
-        app:layout_constraintVertical_bias="0.142" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="301dp"
-        android:layout_height="86dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/switchTextbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sample_text"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="189dp"
-        android:layout_height="95dp"
-        android:minHeight="48dp"
-        android:onClick="cycleDistortion"
-        android:text="@string/distortion"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/onOffButton"
-        app:layout_constraintVertical_bias="0.414" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

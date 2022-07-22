@@ -97,7 +97,7 @@ public class DeviceInfoToString {
                 outputString = "Wired Headphones";
                 break;
             default:
-                outputString = "Error Unrecognised, DeviceId = " + String.valueOf(type);
+                outputString = "External Interface Device";
         }
         return outputString;
     }

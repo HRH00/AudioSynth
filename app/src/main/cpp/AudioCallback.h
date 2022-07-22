@@ -33,8 +33,6 @@ public:
                   std::function<void(numeric_type *, numeric_type *)> fun,
                   size_t buffer_size, std::function<void(void)> restartFunction) :
             kBufferSize(buffer_size), inRef(inStream), f(fun), restart(restartFunction) {}
-
-
     oboe::DataCallbackResult
     onAudioReady(oboe::AudioStream *outputStream, void *audioData, int32_t numFrames) override {
         auto *outputData = static_cast<numeric_type *>(audioData);
@@ -59,10 +57,8 @@ public:
                     *outputData++ = inputBuffer[i];
                 }
                 else{
-                    *outputData++ = (sin(inputBuffer[i])*10);
+                    *outputData++ = (sin(inputBuffer[i])*inputBuffer[i]*2);
                 }
-
-
             }
         }
         return oboe::DataCallbackResult::Continue;

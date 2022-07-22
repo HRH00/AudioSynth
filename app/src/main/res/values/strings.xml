@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AudioSynth</string>
     <string name="distortion">Distortion</string>
+    <string name="input_drop">Select an Input Device</string>
+    <string name="output_drop">Select an Output Device</string>
+    <string name="fillDropdownBtn">Refresh Devices</string>
 </resources>

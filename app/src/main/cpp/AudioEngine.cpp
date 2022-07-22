@@ -19,14 +19,13 @@
 #include "AudioCallback.h"
 #include "logging_macros.h"
 
+
 static int SAMPLE_RATE = 48000;
 
 
 AudioEngine::AudioEngine(){
     beginStreams();
 }
-
-
 //I16 signed 16 bit integer, float for AAudio
 void AudioEngine::beginStreams() {
     LOGI("beginStreams has been called");
@@ -69,6 +68,7 @@ oboe::AudioStreamBuilder AudioEngine::defaultBuilder() {
     return *oboe::AudioStreamBuilder()
             .setPerformanceMode(oboe::PerformanceMode::LowLatency)
             ->setSharingMode(oboe::SharingMode::Exclusive
+
               );
 }
 
